@@ -1,5 +1,6 @@
 import { decorate, observable, computed } from "mobx";
 import axios from "axios";
+import AuthorStore from "../stores/AuthorStore";
 
 const instance = axios.create({
   baseURL: "https://the-index-api.herokuapp.com"
@@ -35,6 +36,23 @@ class BookStore {
 
   getBooksByColor(color) {
     return this.filteredBooks.filter(book => book.color === color);
+  }
+
+  addBook(newBook, authorID) {
+    console.log(authorID);
+    let superNewBook = {
+      ...newBook,
+      authors: [authorID]
+    };
+    axios
+      .post("https://the-index-api.herokuapp.com/api/books/", superNewBook)
+      .then(res => res.data)
+      .then(data => {
+        this.statusMessage = "SUCESS!!";
+        this.books.push(data);
+      })
+
+      .catch(err => console.error(err));
   }
 }
 

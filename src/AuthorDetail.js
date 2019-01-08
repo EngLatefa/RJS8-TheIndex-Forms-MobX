@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import AddBookModal from "./AddBookModal";
 
 // Components
 import BookTable from "./BookTable";
+import { observer } from "mobx-react";
+import { withRouter } from "react-router-dom";
 
 // Stores
 import authorStore from "./stores/AuthorStore";
@@ -16,6 +19,7 @@ class AuthorDetail extends Component {
     return (
       <div>
         <div>
+          <AddBookModal />
           <h3>{author.first_name + " " + author.last_name}</h3>
           <img
             src={author.imageUrl}
@@ -29,4 +33,4 @@ class AuthorDetail extends Component {
   }
 }
 
-export default AuthorDetail;
+export default withRouter(observer(AuthorDetail));

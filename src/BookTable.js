@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import BookRow from "./BookRow";
 
+import { observer } from "mobx-react";
+
 class BookTable extends Component {
   render() {
     const bookRows = this.props.books.map(book => (
@@ -23,4 +25,4 @@ class BookTable extends Component {
   }
 }
 
-export default BookTable;
+export default observer(BookTable);
